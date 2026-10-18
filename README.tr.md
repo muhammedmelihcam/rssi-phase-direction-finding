@@ -166,7 +166,11 @@ Konum hatası, metre (`results/trilaterasyon.csv`):
 
 Kodun ilk sürümü her zaman ilk bulunan çözümü tutuyordu. Başlangıç noktalarının sırası yüzünden bu hep hedefin bulunduğu taraftı ve doğrusal dizilim üçgenden iyi görünüyordu. Eşit maliyetli çözümler arasından rastgele seçmek bunu düzeltti. Yukarıdaki tablo düzeltilmiş koddan geliyor.
 
-**Harita.** `results/harita.html` (folium), her geometri için 20 paketli tek bir koşuyu gösterir: alıcılar, kestirilen mesafe daireleri, gerçek konum, kestirim ve benzetimdeki %90 hata yarıçapıyla çizilen daire. Her geometri ayrı bir katmandır. Yerel metreler **keyfi** bir başlangıç noktası (39,0° K, 35,0° D) etrafında enlem ve boylama çevrilir, gerçek bir arama alanını temsil etmez. Kaydedilen örnekte doğrusal dizilim ayna çözümünü seçmiş.
+**Harita.** `results/harita.html` (folium), her geometri için 20 paketli tek bir koşuyu gösterir: alıcılar, kestirilen mesafe daireleri, gerçek konum, kestirim ve benzetimdeki %90 hata yarıçapıyla çizilen daire. Her geometri ayrı bir katmandır. Yerel metreler **keyfi** bir başlangıç noktası (39,0° K, 35,0° D) etrafında enlem ve boylama çevrilir, gerçek bir arama alanını temsil etmez. Arka plan karoları internet bağlantısı gerektirdiği için aynı koşu arka plansız durağan bir görsel olarak da çizildi (`results/harita.png`):
+
+![Harita görünümü](results/harita.png)
+
+Bu koşuda üçgen hedefi 56 m ıskalıyor ve hedef 101 m'lik dairenin içinde. Neredeyse doğrusal ve doğrusal dizilimlerin ikisi de alıcıların altındaki ayna çözümünü seçiyor, hedeften 442 m ve 487 m uzakta. Bu dairelerin merkezine gönderilen bir arama ekibi doğrunun yanlış tarafında arardı.
 
 ## Gerçek ölçüm
 

@@ -8,6 +8,7 @@ göre enlem ve boylama çevrilir; bu nokta gerçek bir arama alanını temsil et
   trilaterasyon.csv     geometri ve süzme durumuna göre konum hatası
   trilaterasyon.png     kestirilen konumların dağılımı
   harita.html           alıcılar, gerçek konum, kestirilen konum ve hata dairesi (folium)
+  harita.png            aynı koşunun arka plansız durağan görüntüsü
 """
 import folium
 import matplotlib.pyplot as plt
@@ -110,6 +111,39 @@ def harita(ornekler, ozet):
     m.save(str(SONUC / "harita.html"))
 
 
+def harita_gorseli(ornekler, ozet):
+    """harita.html ile aynı koşunun arka plansız durağan görüntüsü (README'de gösterilir)."""
+    renk = {"ucgen": "#1f77b4", "neredeyse_dogrusal": "#ff7f0e", "dogrusal": "#d62728"}
+    fig, eksenler = plt.subplots(1, 3, figsize=(17, 5.8))
+    for ax, (ad, (alicilar, d, kestirim)) in zip(eksenler, ornekler.items()):
+        p90 = ozet[(ozet["geometri"] == ad) & (ozet["paket"] == PAKET)]["p90_m"].iloc[0]
+        hata = np.linalg.norm(kestirim - HEDEF)
+        for a, di in zip(alicilar, d):
+            ax.add_patch(plt.Circle(a, di, fill=False, color="0.6", lw=0.8))
+        ax.add_patch(plt.Circle(kestirim, p90, color=renk[ad], alpha=0.15))
+        ax.plot(*alicilar.T, "k^", ms=10)
+        ax.plot(*HEDEF, "g*", ms=16)
+        ax.plot(*kestirim, "X", color=renk[ad], ms=11)
+        ax.set_title(f"{BASLIKLAR[ad]}\nestimate error {hata:.0f} m, 90% circle r = {p90:.0f} m", fontsize=10)
+        ax.set_xlim(-650, 1450)
+        ax.set_ylim(-900, 1200)
+        ax.set_aspect("equal")
+        ax.set_xlabel("east [m]")
+        ax.grid(alpha=0.3)
+    eksenler[0].set_ylabel("north [m]")
+    temsilci = [Line2D([], [], ls="", marker="^", ms=8, color="k", label="receivers"),
+                Line2D([], [], color="0.6", lw=0.8, label="estimated distance (RSSI)"),
+                Line2D([], [], ls="", marker="*", ms=12, color="g", label="true position"),
+                Line2D([], [], ls="", marker="X", ms=9, color="0.3", label="estimated position"),
+                Line2D([], [], ls="", marker="o", ms=12, color="0.3", alpha=0.25, label="90% error circle")]
+    fig.suptitle(f"Map view of one run per geometry ({PAKET} packets per receiver, Kalman filtered)")
+    fig.tight_layout(rect=(0, 0.08, 1, 0.97))  # altta gösterge için boşluk
+    fig.legend(handles=temsilci, loc="lower center", ncol=5, fontsize=9, frameon=False,
+               bbox_to_anchor=(0.5, 0.0))
+    fig.savefig(SONUC / "harita.png", dpi=150)
+    plt.close(fig)
+
+
 def main():
     SONUC.mkdir(exist_ok=True)
     rng = np.random.default_rng(TOHUM)
@@ -166,7 +200,8 @@ def main():
         ornekler[ad] = (alicilar, d, konum_bul(alicilar, d, rng))
         print(f"harita örneği, {ad}: mesafeler {d.round(1)}, kestirim {ornekler[ad][2].round(1)}")
     harita(ornekler, ozet)
-    print("yazıldı: results/trilaterasyon.csv, trilaterasyon.png, harita.html")
+    harita_gorseli(ornekler, ozet)
+    print("yazıldı: results/trilaterasyon.csv, trilaterasyon.png, harita.html, harita.png")
 
 
 if __name__ == "__main__":

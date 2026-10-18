@@ -168,7 +168,11 @@ Position error in metres (`results/trilaterasyon.csv`):
 
 An early version of the code always kept the first solution found. Because of the order of the starting points, this was always the side where the target was, so collinear receivers looked better than the triangle. Picking at random among equal-cost solutions fixed this. The table above is from the corrected code.
 
-**Map.** `results/harita.html` (folium) shows, for one 20-packet run per geometry: the receivers, a circle of each estimated distance, the true position, the estimate, and a circle with the simulated 90% error radius. Each geometry is a separate layer. Local metres are converted to latitude and longitude around an **arbitrary** origin (39.0° N, 35.0° E). It does not represent a real search area. In the saved example, the collinear layout picks the mirror solution.
+**Map.** `results/harita.html` (folium) shows, for one 20-packet run per geometry: the receivers, a circle of each estimated distance, the true position, the estimate, and a circle with the simulated 90% error radius. Each geometry is a separate layer. Local metres are converted to latitude and longitude around an **arbitrary** origin (39.0° N, 35.0° E). It does not represent a real search area. The background tiles need an internet connection, so the same run is also drawn as a static image (`results/harita.png`, no background):
+
+![Map view](results/harita.png)
+
+In this run the triangle misses by 56 m and the target is inside the 101 m circle. Both the nearly collinear and the collinear layouts pick the mirror solution below the receivers, 442 m and 487 m away from the target. A search team sent to the centre of those circles would search on the wrong side of the line.
 
 ## Real measurement
 
