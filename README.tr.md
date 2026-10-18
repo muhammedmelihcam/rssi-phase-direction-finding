@@ -231,3 +231,7 @@ src/        kaynak kodlar
 data/       gerçek ölçüm CSV dosyaları (boş: henüz ölçüm yok)
 results/    tablolar, grafikler ve harita
 ```
+
+## Lisans
+
+MIT, bkz. [LICENSE](LICENSE). `results/harita.html` içindeki harita, arka plan karolarını OpenStreetMap'ten yükler (© OpenStreetMap katkıcıları, ODbL).

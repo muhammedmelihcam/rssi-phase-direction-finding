@@ -233,3 +233,7 @@ src/        source code
 data/       real measurement CSV files (empty: no measurement yet)
 results/    tables, plots and the map
 ```
+
+## License
+
+MIT, see [LICENSE](LICENSE). The map in `results/harita.html` loads its background tiles from OpenStreetMap (© OpenStreetMap contributors, ODbL).
