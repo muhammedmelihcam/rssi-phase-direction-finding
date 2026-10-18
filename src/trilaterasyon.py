@@ -84,7 +84,11 @@ def enlem_boylam(xy):
 
 
 def harita(ornekler, ozet):
-    m = folium.Map(location=enlem_boylam(HEDEF)[0].tolist(), zoom_start=15, control_scale=True)
+    # OSM'nin kendi karo sunucusu yerelden (file://) açılan sayfaları engelliyor, CARTO anahtar istiyor;
+    # Esri karoları anahtarsız açılıyor. Atıf metni karo katmanıyla birlikte haritaya eklenir.
+    m = folium.Map(location=enlem_boylam(HEDEF)[0].tolist(), zoom_start=15, control_scale=True, tiles=None)
+    folium.TileLayer("Esri.WorldStreetMap", name="streets").add_to(m)
+    folium.TileLayer("Esri.WorldImagery", name="satellite").add_to(m)
     renk = {"ucgen": "blue", "neredeyse_dogrusal": "orange", "dogrusal": "red"}
     for ad, (alicilar, d, kestirim) in ornekler.items():
         p90 = ozet[(ozet["geometri"] == ad) & (ozet["paket"] == PAKET)]["p90_m"].iloc[0]

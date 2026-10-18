@@ -234,4 +234,4 @@ results/    tablolar, grafikler ve harita
 
 ## Lisans
 
-MIT, bkz. [LICENSE](LICENSE). `results/harita.html` içindeki harita, arka plan karolarını OpenStreetMap'ten yükler (© OpenStreetMap katkıcıları, ODbL).
+MIT, bkz. [LICENSE](LICENSE). `results/harita.html` içindeki harita, sokak ve uydu arka plan karolarını Esri'den yükler (atıf haritanın üzerinde görünür). Arka planın görünmesi için internet bağlantısı gerekir.

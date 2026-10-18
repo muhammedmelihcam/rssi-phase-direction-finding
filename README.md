@@ -236,4 +236,4 @@ results/    tables, plots and the map
 
 ## License
 
-MIT, see [LICENSE](LICENSE). The map in `results/harita.html` loads its background tiles from OpenStreetMap (© OpenStreetMap contributors, ODbL).
+MIT, see [LICENSE](LICENSE). The map in `results/harita.html` loads its street and satellite background tiles from Esri (attribution is shown on the map). An internet connection is needed to see the background.
